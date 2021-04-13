@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.backend.mapper.LoginMapper">
+    <!-- 通用查询映射结果 -->
+    <select id="getUserInfo" resultType="com.example.backend.dao.UserInfoDO"
+            parameterType="com.example.backend.model.LoginModel">
+        select p.user_id as userId, p.user_name as userName, p.user_pwd as userPwd, p.user_type as userType
+        from user_info p
+        <where>
+            and p.user_name = #{userName,jdbcType=INTEGER}
+            and p.user_pwd = #{userPwd,jdbcType=VARCHAR}
+        </where>
+    </select>
+
+</mapper>
