@@ -19,4 +19,11 @@ public class DeviceVO {
     private String deviceType;
     //监控危化品CAS号
     private String elementCas;
+    //监控危化品适宜存放温度
+    private Integer storageTemp;
+    //监控危化品适宜存放湿度
+    private Integer storageHum;
+    //监控危化品适宜存放光照强度
+    private Integer storageLux;
+
 }

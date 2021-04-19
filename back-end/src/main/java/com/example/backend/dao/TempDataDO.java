@@ -9,13 +9,12 @@ import java.util.Date;
 
 @Data
 @Entity
-@TableName("hum_data")
-@Table(name="hum_data")
-public class HumDataDO {
+@TableName("temp_data")
+@Table(name="temp_data")
+public class TempDataDO {
     private Integer Id;
     private Integer deviceId;
     private Integer realTime;
-    private Integer hum;
+    private Integer temp;
     private Date gmtCreate;
-
 }

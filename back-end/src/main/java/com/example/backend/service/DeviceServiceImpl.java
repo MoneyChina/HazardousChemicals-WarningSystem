@@ -4,7 +4,9 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.example.backend.convert.DeviceConvert;
 import com.example.backend.dao.DeviceDO;
 import com.example.backend.dao.UserInfoDO;
+import com.example.backend.dao.WarningInfoDO;
 import com.example.backend.mapper.DeviceMapper;
+import com.example.backend.mapper.WarningMapper;
 import com.example.backend.req.DeleteDeviceReq;
 import com.example.backend.vo.DeviceVO;
 import com.example.backend.vo.UserInfoVo;
@@ -17,6 +19,8 @@ import java.util.List;
 public class DeviceServiceImpl implements DeviceService{
     @Autowired
     DeviceMapper deviceMapper;
+
+
 
     @Override
     public List<DeviceVO> getDeviceList() {
@@ -37,4 +41,18 @@ public class DeviceServiceImpl implements DeviceService{
     public Integer deleteDevice(DeleteDeviceReq deleteDeviceReq) {
         return deviceMapper.deleteById(deleteDeviceReq.getDeviceId());
     }
+
+    @Override
+    public String getNameByDeviceId(Integer deviceId) {
+        DeviceDO deviceDO = deviceMapper.selectById(deviceId);
+        if (deviceDO == null) {
+           return null;
+        } else {
+            return deviceDO.getElementName();
+        }
+    }
+
+
+
+
 }

@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.backend.mapper.DataMapper">
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        id, device_id, gmt_create, temp, hum, lux, smog, ray
+    </sql>
+    <sql id="Warning_Column_List">
+        id, device_id, cn_name, value, gmt_create, discription, param, device_lng, device_lat
+    </sql>
+
+    <!-- 通用查询映射结果 -->
+    <select id="getData" resultType="com.example.backend.dao.DeviceDataDO"
+            >
+        select <include refid="Base_Column_List"/> from device_data
+        where device_id = #{deviceId, jdbcType=INTEGER}
+        order by gmt_create desc
+        limit 0,1
+    </select>
+
+    <select id="getTodayData" resultType="com.example.backend.dao.DeviceDataDO"
+    >
+        select <include refid="Base_Column_List"/> from device_data
+        where device_id = #{deviceId, jdbcType=INTEGER} and (to_days(gmt_create) = to_days(now()))
+        order by gmt_create desc
+        limit 0,1
+    </select>
+
+    <select id="getDataByDays" resultType="com.example.backend.dao.DeviceDataDO"
+    >
+        select <include refid="Base_Column_List"/> from device_data
+        where device_id = #{deviceId, jdbcType=INTEGER} and DATE_SUB(CURDATE(), INTERVAL #{days, jdbcType=INTEGER} DAY)&lt;=date(gmt_create)
+        order by gmt_create asc
+        limit 8
+    </select>
+
+    <select id="getWarningList" resultType="com.example.backend.dao.WarningInfoDO"
+    >
+        select <include refid="Warning_Column_List"/> from warning_list
+        where date(gmt_create) = DATE_FORMAT(#{date},'%Y-%m-%d')
+        order by gmt_create desc
+    </select>
+
+    <select id="getWarningGeneralByDay" resultType="java.lang.Integer"
+    >
+        select count(*) from warning_list
+        where DATE_SUB(CURDATE(), INTERVAL 1 DAY)&lt;=date(gmt_create)
+    </select>
+
+    <select id="getWarningGeneralByWeek" resultType="java.lang.Integer"
+    >
+        select count(*) from warning_list
+        where DATE_SUB(CURDATE(), INTERVAL 7 DAY)&lt;=date(gmt_create)
+    </select>
+
+    <select id="getWarningGeneralByMonth" resultType="java.lang.Integer"
+    >
+        select count(*) from warning_list
+        where DATE_SUB(CURDATE(), INTERVAL 30 DAY)&lt;=date(gmt_create)
+    </select>
+
+
+</mapper>

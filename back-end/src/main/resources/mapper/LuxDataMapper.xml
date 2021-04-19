@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.backend.mapper.LuxDataMapper">
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        id, device_id, real_time, lux, gmt_create
+    </sql>
+
+    <!-- 通用查询映射结果 -->
+    <select id="getLuxData" resultType="com.example.backend.dao.LuxDataDO"
+            >
+        select <include refid="Base_Column_List"/> from lux_data p
+        where real_time = 0 and device_id = #{deviceId, jdbcType=INTEGER}
+        order by gmt_create asc
+        limit #{day, jdbcType=INTEGER}
+    </select>
+
+</mapper>

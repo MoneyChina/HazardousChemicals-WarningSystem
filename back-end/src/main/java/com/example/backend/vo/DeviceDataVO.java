@@ -5,6 +5,8 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.Date;
+
 /**
  * 类
  *
@@ -15,6 +17,9 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class DeviceDataVO {
+    private Integer id;
+    private Integer deviceId;
+    private Date gmtCreate;
     private Integer temp;
     private Integer hum;
     private Integer lux;

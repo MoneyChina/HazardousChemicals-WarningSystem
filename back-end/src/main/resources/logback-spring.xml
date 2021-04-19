@@ -42,6 +42,11 @@
         <appender-ref ref="fileErrorLog"/>
     </logger>
 
+    <logger name="com.example.backend" additivity="false" level="TRACE">
+        <appender-ref ref="fileErrorLog"/>
+        <appender-ref ref="consoleLog"/>
+    </logger>
+
     <!--指定最基础的日志输出级别-->
     <root level="INFO">
         <appender-ref ref="consoleLog"/>

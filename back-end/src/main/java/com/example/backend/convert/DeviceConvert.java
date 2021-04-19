@@ -17,6 +17,9 @@ public class DeviceConvert {
         deviceVO.setDeviceType(deviceDO.getDeviceType());
         deviceVO.setElementCas(deviceDO.getElementCas());
         deviceVO.setElementName(deviceDO.getElementName());
+        deviceVO.setStorageHum(deviceDO.getStorageHum());
+        deviceVO.setStorageLux(deviceDO.getStorageLux());
+        deviceVO.setStorageTemp(deviceDO.getStorageTemp());
         return deviceVO;
     }
 }
